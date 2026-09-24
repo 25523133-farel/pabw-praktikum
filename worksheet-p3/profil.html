@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Favorit Mobile Legends - Farel</title>
+</head>
+<body>
+
+  <!-- LANDMARK HEADER & NAVIGASI -->
+  <header>
+    <h1>Koleksi Hero Favorit Mobile Legends: Bang Bang</h1>
+    <nav aria-label="Navigasi utama">
+      <ul>
+        <li><a href="#daftar-hero">Daftar Hero</a></li>
+        <li><a href="#tambah-hero">Tambah Hero Baru</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- LANDMARK MAIN -->
+  <main>
+
+    <!-- SECTION 1: TABEL DATA & GAMBAR -->
+    <section id="daftar-hero">
+      <h2>Hero yang Sering Dimainkan</h2>
+      
+      <!-- 3 GAMBAR HERO FAVORIT (FANNY, LING, CHOU) -->
+      <figure>
+        <img src="hero-favorit-1.jpg" alt="Tampilan visual hero Fanny di Mobile Legends" width="640" height="360" loading="lazy">
+        <figcaption>Hero Favorit 1: Fanny (Assassin)</figcaption>
+      </figure>
+
+      <figure>
+        <img src="hero-favorit-2.jpg" alt="Tampilan visual hero Ling di Mobile Legends" width="640" height="360" loading="lazy">
+        <figcaption>Hero Favorit 2: Ling (Assassin)</figcaption>
+      </figure>
+
+      <figure>
+        <img src="hero-favorit-3.jpg" alt="Tampilan visual hero Chou di Mobile Legends" width="640" height="360" loading="lazy">
+        <figcaption>Hero Favorit 3: Chou (Fighter)</figcaption>
+      </figure>
+
+      <!-- TABEL DATA HERO -->
+      <table>
+        <caption>Daftar Performa Hero Favorit</caption>
+        <thead>
+          <tr>
+            <th scope="col">Nama Hero</th>
+            <th scope="col">Role / Peran</th>
+            <th scope="col">Win Rate (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Fanny</th>
+            <td>Assassin</td>
+            <td>65.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">Ling</th>
+            <td>Assassin</td>
+            <td>58.0%</td>
+          </tr>
+          <tr>
+            <th scope="row">Chou</th>
+            <td>Fighter</td>
+            <td>60.0%</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION 2: FORMULIR INPUT -->
+    <section id="tambah-hero">
+      <h2>Tambah Hero Baru ke Koleksi</h2>
+      
+      <form action="/simpan" method="post">
+        <p>
+          <label for="nama-hero">Nama Hero:</label>
+          <input type="text" id="nama-hero" name="nama-hero" required placeholder="Contoh: Hayabusa">
+        </p>
+        <p>
+          <label for="role-hero">Role Hero:</label>
+          <input type="text" id="role-hero" name="role-hero" required placeholder="Contoh: Assassin">
+        </p>
+        <p>
+          <label for="winrate-hero">Win Rate (%):</label>
+          <input type="number" id="winrate-hero" name="winrate-hero" min="0" max="100" step="0.1" required placeholder="Contoh: 55.5">
+        </p>
+        <button type="submit">Simpan Hero</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- LANDMARK FOOTER -->
+  <footer>
+    <p>Farel Putra Ragil Wiyono · 25523133 · 2026</p>
+  </footer>
+
+</body>
+</html>
