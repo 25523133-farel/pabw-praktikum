@@ -13,7 +13,7 @@ Topik halaman saya: Koleksi hero favorit saya di game Mobile Legends : Bang Bang
 - Dua bagian utama: Hero yang sering dimainkan, Tambah Hero Baru
 - Kolom tabel: Nama hero, Role, Win Rate (%)
 - Kolom form: Input Nama Hero, Pilih Role, Input Win Rate (%)
-- Gambar: Hero favorit -1.webp, hero favorit-2.webp, hero favorit-3.webp
+- Gambar: hero-favorit -1.webp, hero-favorit-2.webp, hero-favorit-3.jpf
 
 Tulis bagian mana yang dibantu AI dan bagian mana yang Anda
 kerjakan sendiri, atau tulis: tidak memakai AI.
