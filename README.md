@@ -32,3 +32,9 @@ kerjakan sendiri, atau tulis: Dibantu AI untuk penyusunan struktur perintah Git 
 | --color-bg | #3f1111 | latar halaman |
 | --radius-md | 0.5rem | sudut tombol dan kartu |
 | --space-4 | 1rem | jarak standar antar elemen |
+
+
+## Pertemuan 5 — Tata Letak Komponen & Responsive Design
+- Folder pengerjaan: `worksheet-p5/`
+- Pembagian CSS Modular: `tokens.css`, `base.css`, `layout.css`, `komponen.css`, `tema.css`.
+- Fitur layout: Flexbox/Grid responsif untuk katalog Hero Mobile Legends dan penanganan state form.
