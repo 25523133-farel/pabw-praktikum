@@ -38,3 +38,8 @@ kerjakan sendiri, atau tulis: Dibantu AI untuk penyusunan struktur perintah Git 
 - Folder pengerjaan: `worksheet-p5/`
 - Pembagian CSS Modular: `tokens.css`, `base.css`, `layout.css`, `komponen.css`, `tema.css`.
 - Fitur layout: Flexbox/Grid responsif untuk katalog Hero Mobile Legends dan penanganan state form.
+
+## Pertemuan 6 – Layout Responsif Mobile-First & Pengujian Lintas Layar
+- Folder pengerjaan: `worksheet-p6/`
+- Pembagian CSS Modular: `tokens.css`, `base.css`, `layout.css`, `komponen.css`, `tema.css`, `responsif.css`.
+- Fitur layout: Pendekatan Mobile-First dengan breakpoint 48rem dan 60rem, pencegahan overflow teks/gambar, serta pengujian DevTools pada 360px, 768px, dan 1280px.
