@@ -1,0 +1,126 @@
+/* SECTION & CONTAINER */
+section {
+  background-color: var(--warna-card, #2b0b0b);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--warna-border, #5c1818);
+}
+
+h2 {
+  color: var(--warna-emas, #ffcc00);
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  border-left: 4px solid var(--warna-emas, #ffcc00);
+  padding-left: 10px;
+}
+
+/* GALERI HERO (GRID AUTO-FIT) */
+.galeri {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.kartu {
+  background-color: #1a0606;
+  border: 1px solid var(--warna-border, #5c1818);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.kartu img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+
+.kartu-kaki {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #220808;
+}
+
+.kartu-kaki span {
+  font-weight: bold;
+  color: #fff;
+}
+
+.kartu-kaki small {
+  color: var(--warna-emas, #ffcc00);
+}
+
+/* TABEL STYLING */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background-color: #1a0606;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+caption {
+  margin-bottom: 8px;
+  font-style: italic;
+  color: #ccc;
+  text-align: left;
+}
+
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #3f1111;
+}
+
+thead th {
+  background-color: #5c1818;
+  color: var(--warna-emas, #ffcc00);
+}
+
+/* FORM STYLING */
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--warna-border, #5c1818);
+  background-color: #1a0606;
+  color: #fff;
+  width: 100%;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--warna-emas, #ffcc00);
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--warna-emas, #ffcc00);
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background-color: #e6b800;
+}

@@ -1,0 +1,62 @@
+/* ==========================================
+   LEMBAR B: Gaya Dasar (Layar Sempit / HP)
+   ========================================== */
+.isi,
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4, 1rem);
+}
+
+.galeri,
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4, 1rem);
+}
+
+/* ==========================================
+   LEMBAR C: Titik Henti (Breakpoint)
+   ========================================== */
+
+/* Tablet (min-width: 48rem / 768px): Galeri 2 Kolom */
+@media (min-width: 48rem) {
+  .galeri,
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop (min-width: 60rem / 960px): Sidebar Bersanding & Galeri 3 Kolom */
+@media (min-width: 60rem) {
+  .isi,
+  .content {
+    grid-template-columns: 16rem 1fr;
+  }
+
+  .galeri,
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================
+   LEMBAR D: Gambar, Tabel, dan Teks
+   ========================================== */
+
+/* Gambar tidak melebihi wadahnya */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tabel lebar dapat digulir sendiri */
+.table-wrap {
+  overflow-x: auto;
+}
+
+/* Teks mengikuti ukuran huruf pengguna */
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+}

@@ -1,162 +1,112 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hero Favorit Mobile Legends - Farel</title>
-    
-    <!-- Pemanggilan 5 berkas CSS terpisah dari folder css/ -->
-    <link rel="stylesheet" href="css/tokens.css" />
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/layout.css" />
-    <link rel="stylesheet" href="css/komponen.css" />
-    <link rel="stylesheet" href="css/tema.css" />
-  </head>
-  <body>
-    <!-- Wadah pembungkus utama P5 untuk CSS Grid Layout -->
-    <div class="page">
-      <header>
-        <div class="navbar">
-          <h1>Koleksi Hero Favorit Mobile Legends: Bang Bang</h1>
-          <nav aria-label="Navigasi utama">
-            <ul>
-              <li><a href="#daftar-hero">Daftar Hero</a></li>
-              <li><a href="#tambah-hero">Tambah Hero Baru</a></li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+<head>
+  <meta charset="UTF-8">
+  <!-- Lembar A: Meta Viewport Mandatory -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koleksi Hero Favorit Mobile Legends: Bang Bang</title>
+  
+  <!-- CSS Modular -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/komponen.css">
+  <link rel="stylesheet" href="css/tema.css">
+  <link rel="stylesheet" href="css/responsif.css">
+</head>
+<body>
+  <div class="page">
+    <!-- Kepala Halaman / Navbar -->
+    <header class="kepala">
+      <h1>Koleksi Hero Favorit Mobile Legends: Bang Bang</h1>
+      <nav class="navigasi">
+        <a href="#galeri" class="tombol">Daftar Hero</a>
+        <a href="#tambah" class="tombol">Tambah Hero Baru</a>
+      </nav>
+    </header>
 
-      <!-- LANDMARK MAIN (Wadah Grid 2 Kolom) -->
-      <main class="isi">
-        <!-- SECTION 1: TABEL DATA & GAMBAR -->
-        <section id="daftar-hero" class="utama">
-          <h2>Hero yang Sering Dimainkan</h2>
+    <!-- Konten Utama & Sidebar (Grid Layout) -->
+    <div class="isi content">
+      <!-- Sidebar / Sisi Samping -->
+      <aside class="sisi sidebar">
+        <h2>Hero yang Sering Dimainkan</h2>
+        <div class="galeri-mini">
+  <div class="kartu-mini">
+    <img src="hero-favorit-1.jpg" alt="Fanny">
+    <div class="info-hero">
+      <strong>Fanny</strong>
+      <span>Assassin</span>
+    </div>
+  </div>
+  <div class="kartu-mini">
+    <img src="hero-favorit-2.jpg" alt="Ling">
+    <div class="info-hero">
+      <strong>Ling</strong>
+      <span>Assassin</span>
+    </div>
+  </div>
+  <div class="kartu-mini">
+    <img src="hero-favorit-3.jpg" alt="Chou">
+    <div class="info-hero">
+      <strong>Chou</strong>
+      <span>Fighter</span>
+    </div>
+  </div>
+</div>
 
-          <!-- GALERI HERO ADAPTIF (GRID AUTO-FIT) -->
-          <div class="galeri">
-            <figure class="kartu sorotan">
-              <img
-                src="hero-favorit-1.jpg"
-                alt="Tampilan visual hero Fanny di Mobile Legends"
-                width="640"
-                height="360"
-                loading="lazy"
-              />
-              <figcaption class="kartu-kaki">
-                <span>Fanny</span>
-                <small>Assassin</small>
-              </figcaption>
-            </figure>
-
-            <figure class="kartu">
-              <img
-                src="hero-favorit-2.jpg"
-                alt="Tampilan visual hero Ling di Mobile Legends"
-                width="640"
-                height="360"
-                loading="lazy"
-              />
-              <figcaption class="kartu-kaki">
-                <span>Ling</span>
-                <small>Assassin</small>
-              </figcaption>
-            </figure>
-
-            <figure class="kartu">
-              <img
-                src="hero-favorit-3.jpg"
-                alt="Tampilan visual hero Chou di Mobile Legends"
-                width="640"
-                height="360"
-                loading="lazy"
-              />
-              <figcaption class="kartu-kaki">
-                <span>Chou</span>
-                <small>Fighter</small>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- TABEL DATA HERO -->
+        <h3>Daftar Performa Hero Favorit</h3>
+        <div class="table-wrap">
           <table>
-            <caption>
-              Daftar Performa Hero Favorit
-            </caption>
             <thead>
               <tr>
-                <th scope="col">Nama Hero</th>
-                <th scope="col">Role / Peran</th>
-                <th scope="col">Win Rate (%)</th>
+                <th>Nama Hero</th>
+                <th>Role / Peran</th>
+                <th>Win Rate (%)</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">Fanny</th>
+                <td>Fanny</td>
                 <td>Assassin</td>
                 <td>65.0%</td>
               </tr>
               <tr>
-                <th scope="row">Ling</th>
+                <td>Ling</td>
                 <td>Assassin</td>
                 <td>58.0%</td>
               </tr>
               <tr>
-                <th scope="row">Chou</th>
+                <td>Chou</td>
                 <td>Fighter</td>
                 <td>60.0%</td>
               </tr>
             </tbody>
           </table>
-        </section>
+        </div>
+      </aside>
 
-        <!-- SECTION 2: FORMULIR INPUT -->
-        <section id="tambah-hero" class="sisi">
+      <!-- Area Utama / Form & Galeri -->
+      <main class="utama main-content">
+        <section id="tambah" class="kartu">
           <h2>Tambah Hero Baru</h2>
-
-          <form action="/simpan" method="post">
-            <p class="form-group">
-              <label for="nama-hero">Nama Hero:</label>
-              <input
-                type="text"
-                id="nama-hero"
-                name="nama-hero"
-                required
-                placeholder="Contoh: Hayabusa"
-              />
-            </p>
-            <p class="form-group">
-              <label for="role-hero">Role Hero:</label>
-              <input
-                type="text"
-                id="role-hero"
-                name="role-hero"
-                required
-                placeholder="Contoh: Assassin"
-              />
-            </p>
-            <p class="form-group">
-              <label for="winrate-hero">Win Rate (%):</label>
-              <input
-                type="number"
-                id="winrate-hero"
-                name="winrate-hero"
-                min="0"
-                max="100"
-                step="0.1"
-                required
-                placeholder="Contoh: 55.5"
-              />
-            </p>
-            <button type="submit" class="btn">Simpan Hero</button>
+          <form class="formulir">
+            <div class="grup-input">
+              <label for="nama">Nama Hero:</label>
+              <input type="text" id="nama" placeholder="Contoh: Hayabusa">
+            </div>
+            <div class="grup-input">
+              <label for="role">Role Hero:</label>
+              <input type="text" id="role" placeholder="Contoh: Assassin">
+            </div>
+            <div class="grup-input">
+              <label for="wr">Win Rate (%):</label>
+              <input type="text" id="wr" placeholder="Contoh: 55.5">
+            </div>
+            <button type="submit" class="tombol-utama">Simpan Hero</button>
           </form>
         </section>
       </main>
-
-      <!-- LANDMARK FOOTER -->
-      <footer>
-        <p>Farel Putra Ragil Wiyono · 25523133 · 2026</p>
-      </footer>
     </div>
-  </body>
+  </div>
+</body>
 </html>
