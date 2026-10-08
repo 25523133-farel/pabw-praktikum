@@ -43,3 +43,8 @@ kerjakan sendiri, atau tulis: Dibantu AI untuk penyusunan struktur perintah Git 
 - Folder pengerjaan: `worksheet-p6/`
 - Pembagian CSS Modular: `tokens.css`, `base.css`, `layout.css`, `komponen.css`, `tema.css`, `responsif.css`.
 - Fitur layout: Pendekatan Mobile-First dengan breakpoint 48rem dan 60rem, pencegahan overflow teks/gambar, serta pengujian DevTools pada 360px, 768px, dan 1280px.
+
+## Pertemuan 8 – JavaScript Modern ES6+, Struktur Data, dan Array Methods
+- Folder pengerjaan: `worksheet-p8/`
+- Materi: Variabel ES6 (`const`/`let`), Fungsi Murni, Array Methods (`map`, `filter`, `find`), dan Penanganan Galat via Console DevTools.
+- Hasil: Data profil dan proyek berhasil diolah secara dinamis melalui `app.js`.
