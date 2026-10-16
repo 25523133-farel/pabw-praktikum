@@ -1,148 +1,84 @@
-// ==========================================
-// SELEKSI ELEMEN DOM
-// ==========================================
+// js/dom.js
 const heroListContainer =
   document.querySelector(".hero-cards") ||
   document.querySelector("#daftar-hero") ||
   document.querySelector(".sisi") ||
   document.body;
 
-const filterRow =
-  document.querySelector(".filter-buttons") ||
-  document.querySelector("header") ||
-  document.body;
-
-// Elemen penampung pesan status (Empty / Loading / Error State)
-let emptyMessage = document.querySelector("#empty-message");
-if (!emptyMessage) {
-  emptyMessage = document.createElement("p");
-  emptyMessage.id = "empty-message";
-  emptyMessage.textContent = "Tidak ada hero yang cocok dengan kategori ini.";
-  emptyMessage.style.textAlign = "center";
-  emptyMessage.style.color = "#ccc";
-  emptyMessage.style.padding = "20px";
-  emptyMessage.hidden = true;
+// Element status pesan UI
+let statusMessage = document.querySelector("#status-message");
+if (!statusMessage) {
+  statusMessage = document.createElement("p");
+  statusMessage.id = "status-message";
+  statusMessage.style.textAlign = "center";
+  statusMessage.style.padding = "15px";
+  statusMessage.style.color = "#ffcc00";
   if (heroListContainer.parentNode) {
-    heroListContainer.parentNode.insertBefore(emptyMessage, heroListContainer.nextSibling);
+    heroListContainer.parentNode.insertBefore(statusMessage, heroListContainer);
   }
 }
 
-const heroForm = document.querySelector("#tambah-hero form") || document.querySelector("form");
-
-// ==========================================
-// BUILD CARD (Membuat Kartu Hero + Gambar)
-// ==========================================
-function buildCard(hero) {
-  const card = document.createElement("div");
-  card.className = "card";
-
-  // 1. Tag Gambar
-  const img = document.createElement("img");
-  img.src = hero.gambar || "hero-favorit-1.jpg";
-  img.alt = hero.nama;
-  img.style.width = "100%";
-  img.style.height = "200px";
-  img.style.objectFit = "cover";
-  img.style.objectPosition = "top center";
-  img.style.borderRadius = "8px";
-  img.style.marginBottom = "10px";
-
-  // Fallback jika file gambar lokal tidak ditemukan
-  img.onerror = () => {
-    img.src = "hero-favorit-1.jpg";
-  };
-
-  // 2. Tag Nama Hero
-  const nama = document.createElement("h3");
-  nama.textContent = hero.nama;
-
-  // 3. Tag Role
-  const role = document.createElement("p");
-  role.textContent = `Role: ${hero.role}`;
-
-  // 4. Tag Win Rate
-  const winRate = document.createElement("p");
-  winRate.textContent = `Win Rate: ${hero.winRate}%`;
-
-  // Gabungkan ke kartu
-  card.append(img, nama, role, winRate);
-  return card;
+// 1. Loading State
+export function showLoading() {
+  heroListContainer.textContent = "";
+  statusMessage.textContent = "⏳ Memuat data hero dari server...";
+  statusMessage.hidden = false;
 }
 
-// ==========================================
-// RENDER PATTERN (Pembersihan & Render Kartu)
-// ==========================================
-export function render(list) {
+// 2. Failure State
+export function showError(msg) {
   heroListContainer.textContent = "";
+  statusMessage.textContent = `❌ Gagal memuat data: ${msg}`;
+  statusMessage.hidden = false;
+}
 
+// 3. Success & Empty State
+export function render(list) {
+  heroListContainer.textContent = ""; // Clear container
+
+  // 4. Empty State
   if (!list || list.length === 0) {
-    emptyMessage.hidden = false;
+    statusMessage.textContent = "📭 Tidak ada data hero yang tersedia.";
+    statusMessage.hidden = false;
     return;
   }
 
-  emptyMessage.hidden = true;
+  statusMessage.hidden = true; // Sembunyikan status jika sukses
 
   list.forEach((hero) => {
     heroListContainer.append(buildCard(hero));
   });
 }
 
+function buildCard(hero) {
+  const card = document.createElement("div");
+  card.className = "card";
+
+  const img = document.createElement("img");
+  img.src = hero.gambar || "hero-favorit-1.jpg";
+  img.alt = hero.nama;
+  img.style.width = "100%";
+  img.style.height = "160px";
+  img.style.objectFit = "cover";
+  img.style.objectPosition = "top center";
+  img.style.borderRadius = "8px";
+  img.style.marginBottom = "10px";
+
+  img.onerror = () => {
+    img.src = "hero-favorit-1.jpg";
+  };
+
+  const nama = document.createElement("h3");
+  nama.textContent = hero.nama;
+
+  const role = document.createElement("p");
+  role.textContent = `Role: ${hero.role}`;
+
+  const winRate = document.createElement("p");
+  winRate.textContent = `Win Rate: ${hero.winRate}%`;
+
+  card.append(img, nama, role, winRate);
+  return card;
+}
+
 window.render = render;
-
-// ==========================================
-// EVENT DELEGATION (Tombol Filter)
-// ==========================================
-if (filterRow) {
-  filterRow.addEventListener("click", (event) => {
-    const button = event.target.closest("button");
-    if (!button) return;
-
-    const category = button.dataset.category || button.textContent.trim().toLowerCase();
-
-    filterRow.querySelectorAll("button").forEach((btn) => {
-      btn.classList.toggle("active", btn === button);
-    });
-
-    const dataHero = window.daftarHero || [];
-
-    const selected = dataHero.filter((hero) => {
-      if (category === "all" || category === "daftar hero" || category === "semua") return true;
-      return hero.role.toLowerCase() === category;
-    });
-
-    render(selected);
-  });
-}
-
-// ==========================================
-// FORM VALIDATION & SUBMIT
-// ==========================================
-if (heroForm) {
-  heroForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const inputNama = heroForm.querySelector("input[type='text']") || heroForm.querySelectorAll("input")[0];
-    const inputRole = heroForm.querySelectorAll("input")[1];
-    const inputWinRate = heroForm.querySelector("input[type='number']") || heroForm.querySelectorAll("input")[2];
-
-    if (!inputNama || inputNama.value.trim() === "") {
-      alert("Nama Hero tidak boleh kosong!");
-      if (inputNama) inputNama.focus();
-      return;
-    }
-
-    const heroBaru = {
-      nama: inputNama.value.trim(),
-      role: inputRole ? inputRole.value.trim() : "Unknown",
-      winRate: inputWinRate ? parseFloat(inputWinRate.value) || 0 : 0,
-      gambar: "hero-favorit-1.jpg"
-    };
-
-    if (window.daftarHero) {
-      window.daftarHero.push(heroBaru);
-      render(window.daftarHero);
-    }
-
-    heroForm.reset();
-  });
-}
