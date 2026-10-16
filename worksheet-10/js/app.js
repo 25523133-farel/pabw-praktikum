@@ -14,4 +14,4 @@ async function initApp() {
 }
 
 // Jalankan aplikasi
-initApp();
+initApp(); 

@@ -1,84 +1,76 @@
 // js/dom.js
-const heroListContainer =
-  document.querySelector(".hero-cards") ||
-  document.querySelector("#daftar-hero") ||
-  document.querySelector(".sisi") ||
-  document.body;
 
-// Element status pesan UI
-let statusMessage = document.querySelector("#status-message");
-if (!statusMessage) {
-  statusMessage = document.createElement("p");
-  statusMessage.id = "status-message";
-  statusMessage.style.textAlign = "center";
-  statusMessage.style.padding = "15px";
-  statusMessage.style.color = "#ffcc00";
-  if (heroListContainer.parentNode) {
-    heroListContainer.parentNode.insertBefore(statusMessage, heroListContainer);
-  }
-}
-
-// 1. Loading State
-export function showLoading() {
-  heroListContainer.textContent = "";
-  statusMessage.textContent = "⏳ Memuat data hero dari server...";
-  statusMessage.hidden = false;
-}
-
-// 2. Failure State
-export function showError(msg) {
-  heroListContainer.textContent = "";
-  statusMessage.textContent = `❌ Gagal memuat data: ${msg}`;
-  statusMessage.hidden = false;
-}
-
-// 3. Success & Empty State
-export function render(list) {
-  heroListContainer.textContent = ""; // Clear container
-
-  // 4. Empty State
-  if (!list || list.length === 0) {
-    statusMessage.textContent = "📭 Tidak ada data hero yang tersedia.";
-    statusMessage.hidden = false;
-    return;
-  }
-
-  statusMessage.hidden = true; // Sembunyikan status jika sukses
-
-  list.forEach((hero) => {
-    heroListContainer.append(buildCard(hero));
-  });
-}
+const heroListContainer = 
+  document.getElementById("hero-list") || 
+  document.getElementById("daftar-hero") ||
+  document.querySelector(".hero-container") ||
+  document.querySelector(".hero-list") ||
+  document.querySelector("main > div:first-child");
 
 function buildCard(hero) {
   const card = document.createElement("div");
-  card.className = "card";
+  card.className = "hero-card";
+  card.style.cssText = "margin-bottom: 24px; max-width: 360px;";
 
-  const img = document.createElement("img");
-  img.src = hero.gambar || "hero-favorit-1.jpg";
-  img.alt = hero.nama;
-  img.style.width = "100%";
-  img.style.height = "160px";
-  img.style.objectFit = "cover";
-  img.style.objectPosition = "top center";
-  img.style.borderRadius = "8px";
-  img.style.marginBottom = "10px";
+  const heroName = hero.nama || hero.name || "";
+  const heroRole = hero.role || "";
+  
+  let winRate = hero.winRate || hero.win_rate || "0%";
+  if (typeof winRate === "string") {
+    winRate = winRate.replace("%", "") + "%";
+  } else {
+    winRate = winRate + "%";
+  }
 
-  img.onerror = () => {
-    img.src = "hero-favorit-1.jpg";
-  };
+  const heroImg = hero.gambar || hero.image || "";
 
-  const nama = document.createElement("h3");
-  nama.textContent = hero.nama;
+  card.innerHTML = `
+    <div style="width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 8px;">
+      <img src="${heroImg}" alt="${heroName}" style="width: 100%; height: auto; display: block; border-radius: 8px; object-fit: cover;">
+    </div>
+    <h3 style="color: #ffcc00; margin: 8px 0 4px 0; font-size: 1.15rem; font-weight: bold;">${heroName}</h3>
+    <p style="margin: 0 0 4px 0; color: #fff;">Role: ${heroRole}</p>
+    <p style="margin: 0 0 16px 0; color: #fff;">Win Rate: ${winRate}</p>
+  `;
 
-  const role = document.createElement("p");
-  role.textContent = `Role: ${hero.role}`;
-
-  const winRate = document.createElement("p");
-  winRate.textContent = `Win Rate: ${hero.winRate}%`;
-
-  card.append(img, nama, role, winRate);
   return card;
 }
 
-window.render = render;
+export function showLoading() {
+  if (heroListContainer) {
+    heroListContainer.innerHTML = `
+      <p style="color: #ffcc00; font-size: 1.1rem; padding: 20px; text-align: center; font-weight: bold;">
+        ⏳ Memuat data hero dari server...
+      </p>
+    `;
+  }
+}
+
+export function showError(msg) {
+  if (heroListContainer) {
+    heroListContainer.innerHTML = `
+      <p style="color: #ff4d4d; font-size: 1.1rem; padding: 20px; text-align: center; font-weight: bold;">
+        ❌ Gagal memuat data: ${msg}
+      </p>
+    `;
+  }
+}
+
+export function render(list) {
+  if (heroListContainer) heroListContainer.textContent = "";
+
+  if (!list || list.length === 0) {
+    if (heroListContainer) {
+      heroListContainer.innerHTML = `
+        <p style="color: #ffcc00; font-size: 1.1rem; padding: 20px; text-align: center; font-weight: bold;">
+          📭 Tidak ada data hero yang tersedia.
+        </p>
+      `;
+    }
+    return;
+  }
+
+  list.forEach((hero) => {
+    if (heroListContainer) heroListContainer.append(buildCard(hero));
+  });
+}
