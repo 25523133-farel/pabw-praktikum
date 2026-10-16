@@ -1,0 +1,24 @@
+/* F.1 Mode Gelap Otomatis dari Pengaturan Sistem */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: var(--dark-red-950);
+    --color-surface: var(--dark-red-900);
+    --color-fg: var(--gray-100);
+    --color-border: var(--dark-red-700);
+  }
+}
+
+/* F.2 Pengalih Tema Manual Tanpa JS via Checkbox */
+.pengalih-tema {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+:root:has(#tema:checked) {
+  --color-bg: var(--dark-red-950);
+  --color-surface: var(--dark-red-900);
+  --color-fg: var(--gray-100);
+  --color-border: var(--dark-red-700);
+  --color-primary: var(--gold-500);
+}
