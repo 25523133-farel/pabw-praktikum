@@ -12,7 +12,7 @@ const filterRow =
   document.querySelector("header") ||
   document.body;
 
-// Elemen penampung pesan kosong (Empty State)
+// Elemen penampung pesan status (Empty / Loading / Error State)
 let emptyMessage = document.querySelector("#empty-message");
 if (!emptyMessage) {
   emptyMessage = document.createElement("p");
@@ -36,7 +36,7 @@ function buildCard(hero) {
   const card = document.createElement("div");
   card.className = "card";
 
-  // 1. Tag Gambar (Proporsi & Fokus Pas)
+  // 1. Tag Gambar
   const img = document.createElement("img");
   img.src = hero.gambar || "hero-favorit-1.jpg";
   img.alt = hero.nama;
@@ -63,3 +63,86 @@ function buildCard(hero) {
   // 4. Tag Win Rate
   const winRate = document.createElement("p");
   winRate.textContent = `Win Rate: ${hero.winRate}%`;
+
+  // Gabungkan ke kartu
+  card.append(img, nama, role, winRate);
+  return card;
+}
+
+// ==========================================
+// RENDER PATTERN (Pembersihan & Render Kartu)
+// ==========================================
+export function render(list) {
+  heroListContainer.textContent = "";
+
+  if (!list || list.length === 0) {
+    emptyMessage.hidden = false;
+    return;
+  }
+
+  emptyMessage.hidden = true;
+
+  list.forEach((hero) => {
+    heroListContainer.append(buildCard(hero));
+  });
+}
+
+window.render = render;
+
+// ==========================================
+// EVENT DELEGATION (Tombol Filter)
+// ==========================================
+if (filterRow) {
+  filterRow.addEventListener("click", (event) => {
+    const button = event.target.closest("button");
+    if (!button) return;
+
+    const category = button.dataset.category || button.textContent.trim().toLowerCase();
+
+    filterRow.querySelectorAll("button").forEach((btn) => {
+      btn.classList.toggle("active", btn === button);
+    });
+
+    const dataHero = window.daftarHero || [];
+
+    const selected = dataHero.filter((hero) => {
+      if (category === "all" || category === "daftar hero" || category === "semua") return true;
+      return hero.role.toLowerCase() === category;
+    });
+
+    render(selected);
+  });
+}
+
+// ==========================================
+// FORM VALIDATION & SUBMIT
+// ==========================================
+if (heroForm) {
+  heroForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const inputNama = heroForm.querySelector("input[type='text']") || heroForm.querySelectorAll("input")[0];
+    const inputRole = heroForm.querySelectorAll("input")[1];
+    const inputWinRate = heroForm.querySelector("input[type='number']") || heroForm.querySelectorAll("input")[2];
+
+    if (!inputNama || inputNama.value.trim() === "") {
+      alert("Nama Hero tidak boleh kosong!");
+      if (inputNama) inputNama.focus();
+      return;
+    }
+
+    const heroBaru = {
+      nama: inputNama.value.trim(),
+      role: inputRole ? inputRole.value.trim() : "Unknown",
+      winRate: inputWinRate ? parseFloat(inputWinRate.value) || 0 : 0,
+      gambar: "hero-favorit-1.jpg"
+    };
+
+    if (window.daftarHero) {
+      window.daftarHero.push(heroBaru);
+      render(window.daftarHero);
+    }
+
+    heroForm.reset();
+  });
+}
