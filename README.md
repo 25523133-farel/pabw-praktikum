@@ -25,26 +25,28 @@ kerjakan sendiri, atau tulis: Dibantu AI untuk penyusunan struktur perintah Git 
 
 ### Token yang saya tetapkan
 
-| Token | Nilai | Untuk apa |
-|---|---|---|
-| --color-primary | #ffcc00 | tombol, tautan, penanda |
-| --color-fg | #f1f1f1 | warna teks utama |
-| --color-bg | #3f1111 | latar halaman |
-| --radius-md | 0.5rem | sudut tombol dan kartu |
-| --space-4 | 1rem | jarak standar antar elemen |
-
+| Token           | Nilai   | Untuk apa                  |
+| --------------- | ------- | -------------------------- |
+| --color-primary | #ffcc00 | tombol, tautan, penanda    |
+| --color-fg      | #f1f1f1 | warna teks utama           |
+| --color-bg      | #3f1111 | latar halaman              |
+| --radius-md     | 0.5rem  | sudut tombol dan kartu     |
+| --space-4       | 1rem    | jarak standar antar elemen |
 
 ## Pertemuan 5 — Tata Letak Komponen & Responsive Design
+
 - Folder pengerjaan: `worksheet-p5/`
 - Pembagian CSS Modular: `tokens.css`, `base.css`, `layout.css`, `komponen.css`, `tema.css`.
 - Fitur layout: Flexbox/Grid responsif untuk katalog Hero Mobile Legends dan penanganan state form.
 
 ## Pertemuan 6 – Layout Responsif Mobile-First & Pengujian Lintas Layar
+
 - Folder pengerjaan: `worksheet-p6/`
 - Pembagian CSS Modular: `tokens.css`, `base.css`, `layout.css`, `komponen.css`, `tema.css`, `responsif.css`.
 - Fitur layout: Pendekatan Mobile-First dengan breakpoint 48rem dan 60rem, pencegahan overflow teks/gambar, serta pengujian DevTools pada 360px, 768px, dan 1280px.
 
 ## Pertemuan 8 – JavaScript Modern ES6+, Struktur Data, dan Array Methods
+
 - Folder pengerjaan: `worksheet-p8/`
 - Materi: Variabel ES6 (`const`/`let`), Fungsi Murni, Array Methods (`map`, `filter`, `find`), dan Penanganan Galat via Console DevTools.
 - Hasil: Data profil dan proyek berhasil diolah secara dinamis melalui `app.js`.
@@ -60,11 +62,13 @@ kerjakan sendiri, atau tulis: Dibantu AI untuk penyusunan struktur perintah Git 
    `querySelector` mengembalikan satu elemen pertama yang cocok, sedangkan `querySelectorAll` mengembalikan `NodeList`. Method `map` tidak bisa langsung dipanggil pada `NodeList` karena bukan array murni (harus diubah dahulu dengan `Array.from()`).
 
 3. **Keuntungan Event Delegation:**
-   Cukup memasang satu *listener* pada elemen induk (`filterRow`). Efisiensi kode meningkat dan tombol baru yang dibuat secara dinamis otomatis memiliki fungsi klik tanpa perlu menambah *listener* baru.
-   
-   *Bukti Kode:*
+   Cukup memasang satu _listener_ pada elemen induk (`filterRow`). Efisiensi kode meningkat dan tombol baru yang dibuat secara dinamis otomatis memiliki fungsi klik tanpa perlu menambah _listener_ baru.
+
+   _Bukti Kode:_
+
    ```javascript
    filterRow.addEventListener("click", (event) => {
      const button = event.target.closest("button");
      // ...
    });
+   ```

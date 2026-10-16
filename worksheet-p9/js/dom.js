@@ -1,10 +1,18 @@
 // ==========================================
-// LEMBAR A — Seleksi Elemen DOM
+// SELEKSI ELEMEN DOM
 // ==========================================
-const heroListContainer = document.querySelector(".hero-cards") || document.querySelector("#daftar-hero") || document.body;
-const filterRow = document.querySelector(".filter-buttons") || document.querySelector("header") || document.body;
+const heroListContainer =
+  document.querySelector(".hero-cards") ||
+  document.querySelector("#daftar-hero") ||
+  document.querySelector(".sisi") ||
+  document.body;
 
-// Elemen tambahan untuk pesan kosong & form
+const filterRow =
+  document.querySelector(".filter-buttons") ||
+  document.querySelector("header") ||
+  document.body;
+
+// Elemen penampung pesan kosong
 let emptyMessage = document.querySelector("#empty-message");
 if (!emptyMessage) {
   emptyMessage = document.createElement("p");
@@ -13,18 +21,41 @@ if (!emptyMessage) {
   emptyMessage.style.textAlign = "center";
   emptyMessage.style.color = "#ccc";
   emptyMessage.hidden = true;
-  heroListContainer.parentNode.insertBefore(emptyMessage, heroListContainer.nextSibling);
+  if (heroListContainer.parentNode) {
+    heroListContainer.parentNode.insertBefore(
+      emptyMessage,
+      heroListContainer.nextSibling,
+    );
+  }
 }
 
-const heroForm = document.querySelector("form");
+const heroForm =
+  document.querySelector("#tambah-hero form") || document.querySelector("form");
 
 // ==========================================
-// LEMBAR B — Build Card & Clear Container
+// BUILD CARD (Elemen Gambar + Detail)
 // ==========================================
 function buildCard(hero) {
   const card = document.createElement("div");
   card.className = "card";
 
+  // 1. Tag Gambar
+  const img = document.createElement("img");
+  img.src = hero.gambar || "hero-favorit-1.jpg";
+  img.alt = hero.nama;
+  img.style.width = "100%";
+  img.style.height = "auto";             
+  img.style.maxHeight = "240px";       
+  img.style.objectFit = "contain";       
+  img.style.borderRadius = "8px";
+  img.style.marginBottom = "10px";
+
+  // Fallback jika file gambar tidak ditemukan
+  img.onerror = () => {
+    img.src = "hero-favorit-1.jpg";
+  };
+
+  // 2. Teks Detail
   const nama = document.createElement("h3");
   nama.textContent = hero.nama;
 
@@ -34,18 +65,16 @@ function buildCard(hero) {
   const winRate = document.createElement("p");
   winRate.textContent = `Win Rate: ${hero.winRate}%`;
 
-  card.append(nama, role, winRate);
+  card.append(img, nama, role, winRate);
   return card;
 }
 
 // ==========================================
-// LEMBAR D — Render Pattern
+// RENDER PATTERN
 // ==========================================
 function render(list) {
-  // 1. Clear container terlebih dahulu
   heroListContainer.textContent = "";
 
-  // 2. Cek kondisi data kosong
   if (!list || list.length === 0) {
     emptyMessage.hidden = false;
     return;
@@ -53,36 +82,37 @@ function render(list) {
 
   emptyMessage.hidden = true;
 
-  // 3. Render kartu dari data
   list.forEach((hero) => {
     heroListContainer.append(buildCard(hero));
   });
 }
 
+window.render = render;
+
 // ==========================================
-// LEMBAR C — Event Delegation pada Tombol Filter
+// EVENT DELEGATION (Tombol Filter)
 // ==========================================
 if (filterRow) {
   filterRow.addEventListener("click", (event) => {
     const button = event.target.closest("button");
     if (!button) return;
 
-    const category = button.dataset.category || button.textContent.trim().toLowerCase();
+    const category =
+      button.dataset.category || button.textContent.trim().toLowerCase();
 
-    // Tandai tombol aktif
     filterRow.querySelectorAll("button").forEach((btn) => {
       btn.classList.toggle("active", btn === button);
     });
 
-    // Ambil data hero dari window atau buat fallback array
-    const dataHero = window.daftarHero || [
-      { nama: "Fanny", role: "Assassin", winRate: 65.0 },
-      { nama: "Ling", role: "Assassin", winRate: 58.0 },
-      { nama: "Chou", role: "Fighter", winRate: 60.0 }
-    ];
+    const dataHero = window.daftarHero || [];
 
     const selected = dataHero.filter((hero) => {
-      if (category === "all" || category === "daftar hero" || category === "semua") return true;
+      if (
+        category === "all" ||
+        category === "daftar hero" ||
+        category === "semua"
+      )
+        return true;
       return hero.role.toLowerCase() === category;
     });
 
@@ -91,30 +121,61 @@ if (filterRow) {
 }
 
 // ==========================================
-// LEMBAR D.2 — Form Validation & Submit
+// FORM VALIDATION & SUBMIT
 // ==========================================
 if (heroForm) {
   heroForm.addEventListener("submit", (event) => {
-    event.preventDefault(); // Mencegah reload halaman
+    event.preventDefault();
 
-    const inputNama = heroForm.querySelector("input[type='text']") || heroForm.querySelectorAll("input")[0];
+    const inputNama =
+      heroForm.querySelector("input[type='text']") ||
+      heroForm.querySelectorAll("input")[0];
     const inputRole = heroForm.querySelectorAll("input")[1];
-    const inputWinRate = heroForm.querySelector("input[type='number']") || heroForm.querySelectorAll("input")[2];
+    const inputWinRate =
+      heroForm.querySelector("input[type='number']") ||
+      heroForm.querySelectorAll("input")[2];
 
-    if (inputNama && inputNama.value.trim() === "") {
+    if (!inputNama || inputNama.value.trim() === "") {
       alert("Nama Hero tidak boleh kosong!");
-      inputNama.focus();
+      if (inputNama) inputNama.focus();
       return;
     }
 
-    console.log("Form berhasil disubmit tanpa reload halaman!");
+    const heroBaru = {
+      nama: inputNama.value.trim(),
+      role: inputRole ? inputRole.value.trim() : "Unknown",
+      winRate: inputWinRate ? parseFloat(inputWinRate.value) || 0 : 0,
+      gambar: "hero-favorit-1.jpg",
+    };
+
+    if (window.daftarHero) {
+      window.daftarHero.push(heroBaru);
+      render(window.daftarHero);
+    }
+
+    heroForm.reset();
   });
 }
 
-// Jalankan render awal saat halaman pertama dimuat
+// Render awal
 const initialData = window.daftarHero || [
-  { nama: "Fanny", role: "Assassin", winRate: 65.0 },
-  { nama: "Ling", role: "Assassin", winRate: 58.0 },
-  { nama: "Chou", role: "Fighter", winRate: 60.0 }
+  {
+    nama: "Fanny",
+    role: "Assassin",
+    winRate: 65.0,
+    gambar: "hero-favorit-1.jpg",
+  },
+  {
+    nama: "Ling",
+    role: "Assassin",
+    winRate: 58.0,
+    gambar: "hero-favorit-1.jpg",
+  },
+  {
+    nama: "Chou",
+    role: "Fighter",
+    winRate: 60.0,
+    gambar: "hero-favorit-1.jpg",
+  },
 ];
 render(initialData);

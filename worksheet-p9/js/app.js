@@ -1,43 +1,51 @@
-// === LEMBAR B: Data Profil sebagai Variabel ===
+// ==========================================
+// DATA PROFIL & HERO MOBILE LEGENDS
+// ==========================================
+
 const profil = {
   nama: "Farel Putra Ragil Wiyono",
   peran: "Pemain MLBB & Web Developer",
-  keahlian: ["Fanny", "Ling", "Chou", "Assassin", "Fighter"],
-  jumlahHero: 3,
+  keahlian: ["Fanny", "Ling", "Chou", "Assassin", "Fighter"]
 };
 
-// === LEMBAR C: Dua Fungsi Murni ===
-// 1. Pembuat kalimat perkenalan
-function buatPerkenalan({ nama, peran }) {
-  return `${nama} — ${peran}`;
-}
+console.log(`${profil.nama} – ${profil.peran}`);
+console.log(profil.keahlian.join(" · "));
 
-// 2. Pemformat daftar keahlian / hero favorit
-const formatKeahlian = (daftar) => daftar.join(" · ");
-
-console.log(buatPerkenalan(profil));
-console.log(formatKeahlian(profil.keahlian));
-
-// === LEMBAR D: Array of Object & Array Methods ===
+// Gunakan gambar lokal yang ada di dalam folder worksheet-p9
 const daftarHero = [
-  { nama: "Fanny", role: "Assassin", winRate: 65.0, seringDimainkan: true },
-  { nama: "Ling", role: "Assassin", winRate: 58.0, seringDimainkan: true },
-  { nama: "Chou", role: "Fighter", winRate: 60.0, seringDimainkan: true },
+  {
+    nama: "Fanny",
+    role: "Assassin",
+    winRate: 65.0,
+    seringDimainkan: true,
+    gambar: "hero-favorit-1.jpg"
+  },
+  {
+    nama: "Ling",
+    role: "Assassin",
+    winRate: 58.0,
+    seringDimainkan: true,
+    gambar: "hero-favorit-2.jpg"
+  },
+  {
+    nama: "Chou",
+    role: "Fighter",
+    winRate: 60.0,
+    seringDimainkan: true,
+    gambar: "hero-favorit-3.jpg"
+  }
 ];
 
-// Menampilkan data sebagai tabel di Console
 console.table(profil.keahlian);
 console.table(daftarHero);
 
-// 1. Filter: Hero yang sering dimainkan
 const heroSering = daftarHero.filter((hero) => hero.seringDimainkan);
 console.table(heroSering);
 
-// 2. Find: Cari hero spesifik berdasarkan nama
 const heroChou = daftarHero.find((hero) => hero.nama === "Chou");
 console.log("Hero ditemukan:", heroChou);
 
-// 3. Map: Ambil daftar nama hero saja
 const daftarNamaHero = daftarHero.map((hero) => hero.nama);
 console.log("Daftar Nama Hero:", daftarNamaHero);
+
 window.daftarHero = daftarHero;
