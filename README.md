@@ -48,3 +48,23 @@ kerjakan sendiri, atau tulis: Dibantu AI untuk penyusunan struktur perintah Git 
 - Folder pengerjaan: `worksheet-p8/`
 - Materi: Variabel ES6 (`const`/`let`), Fungsi Murni, Array Methods (`map`, `filter`, `find`), dan Penanganan Galat via Console DevTools.
 - Hasil: Data profil dan proyek berhasil diolah secara dinamis melalui `app.js`.
+
+# Pertemuan 9 — DOM, Events, and Interactivity
+
+## Jawaban Tiket Keluar (Lembar F)
+
+1. **Elemen & Selektor:**
+   Elemen kontainer kartu hero menggunakan selektor `.hero-cards` yang disimpan dalam variabel `heroListContainer`.
+
+2. **Perbedaan `querySelector` vs `querySelectorAll`:**
+   `querySelector` mengembalikan satu elemen pertama yang cocok, sedangkan `querySelectorAll` mengembalikan `NodeList`. Method `map` tidak bisa langsung dipanggil pada `NodeList` karena bukan array murni (harus diubah dahulu dengan `Array.from()`).
+
+3. **Keuntungan Event Delegation:**
+   Cukup memasang satu *listener* pada elemen induk (`filterRow`). Efisiensi kode meningkat dan tombol baru yang dibuat secara dinamis otomatis memiliki fungsi klik tanpa perlu menambah *listener* baru.
+   
+   *Bukti Kode:*
+   ```javascript
+   filterRow.addEventListener("click", (event) => {
+     const button = event.target.closest("button");
+     // ...
+   });

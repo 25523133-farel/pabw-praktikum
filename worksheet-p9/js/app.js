@@ -40,3 +40,4 @@ console.log("Hero ditemukan:", heroChou);
 // 3. Map: Ambil daftar nama hero saja
 const daftarNamaHero = daftarHero.map((hero) => hero.nama);
 console.log("Daftar Nama Hero:", daftarNamaHero);
+window.daftarHero = daftarHero;
